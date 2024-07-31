@@ -3,6 +3,7 @@ import "../src/globals.css";
 
 export default function App() {
    const [listaProdutos, setProdutos] = useState([
+
         {
             id: 1,
             item: "Hambúrguer",
@@ -28,10 +29,42 @@ export default function App() {
             preco: "R$ 8,99"
         },
     ]);
+    const[listaPedidos,setPedidos]= useState([]);
+    const adicionarProdutoPedido= (produto) => {
+    setPedidos([...listaPedidos,produto]);
 
+    }
+    console.table(listaPedidos);
     return (
-       <div>
+    
+        
+            <div className="bloco-principal">
+            <div className="bloco-produtos">
 
-       </div>
+            {
+                listaProdutos.map((produto) =>
+                <div key={produto.id}>
+                <img src={produto.imagem}/>
+                <p>{produto.item}</p>
+                        <button onClick={() =>
+                            adicionarProdutoPedido(produto)}>Quero</button>
+</div>)  
+
+            }
+            </div>
+        
+             
+       <table>  className="bloco-pedido">
+                <h1>Tabela de pedidos</h1>
+             {
+                listaPedidos.map((pedido)=>
+                <tr>
+                 <td>{pedido.item}</td>
+                 <td>{pedido.preco}</td>
+                   
+                </tr>)
+             }
+                </table>
+            </div>
     );
-}
+        }
